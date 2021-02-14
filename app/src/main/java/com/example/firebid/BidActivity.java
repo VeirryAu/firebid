@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -183,6 +184,34 @@ public class BidActivity extends AppCompatActivity {
         binding.tvProductName.setText(product.getProductName());
         binding.tvProductDescription.setText(product.getDescription());
         loadImage(product.getImageUrl());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = null;
+        try {
+            date = sdf.parse(product.getEndTime());
+            long millisToGo = date.getTime() - new Date().getTime();
+            if(millisToGo > 0) {
+                new CountDownTimer(millisToGo, 1000) {
+
+                    @Override
+                    public void onTick(long millis) {
+                        int seconds = (int) (millis / 1000) % 60;
+                        int minutes = (int) ((millis / (1000 * 60)) % 60);
+                        int hours = (int) ((millis / (1000 * 60 * 60)) % 24);
+                        String text = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+                        binding.tvTickTimeLeft.setText(text);
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        binding.tvTickTimeLeft.setText("00:00:00");
+                    }
+                }.start();
+            } else{
+                binding.tvTickTimeLeft.setText("Bid has ended");
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 //        loadImage("https://firebasestorage.googleapis.com/v0/b/smu-firebase-80435.appspot.com/o/bid_team2%2F1613274665224-WhatsApp%20Image%202020-12-01%20at%209.00.25%20PM.jpeg?alt=media&token=e67223c4-dd3c-4c97-b765-d861d54935c1");
     }
 
