@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "19769712458",
+    "project_id": "smu-firebase-80435",
+    "storage_bucket": "smu-firebase-80435.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19769712458:android:77d3209aa3c57b6acb2bb3",
+        "android_client_info": {
+          "package_name": "com.bremapp.mychat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19769712458-o65jhvqkvgeam5ep2n55cjk8rvl6itj4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6i2b3TWd_TPC8Y_uUPwWEXxN8nVKyTEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19769712458-o65jhvqkvgeam5ep2n55cjk8rvl6itj4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19769712458:android:692e738dc8750879cb2bb3",
+        "android_client_info": {
+          "package_name": "com.example.demofirestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19769712458-o65jhvqkvgeam5ep2n55cjk8rvl6itj4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6i2b3TWd_TPC8Y_uUPwWEXxN8nVKyTEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19769712458-o65jhvqkvgeam5ep2n55cjk8rvl6itj4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
