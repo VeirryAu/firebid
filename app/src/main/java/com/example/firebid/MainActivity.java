@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.firebid.adapter.ProductListAdapter;
 import com.example.firebid.contract.ProductListContract;
@@ -50,9 +51,25 @@ public class MainActivity extends AppCompatActivity implements ProductListContra
             presenter.loadProducts();
         }
 
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-
+        if(requestCode == SIGN_IN_REQUEST_CODE) {
+            if(resultCode == RESULT_OK) {
+                presenter.loadProducts();
+            } else {
+                Toast.makeText(this,
+                        "We couldn't sign you in. Please try again later.",
+                        Toast.LENGTH_LONG)
+                        .show();
+                // Close the app
+                finish();
+            }
+        }
     }
 
     @Override
