@@ -92,7 +92,7 @@ public class BidActivity extends AppCompatActivity {
                 }
 
                 if (product != null && highest != 0 && highest >= bid.getPrice()) {
-                    int highestPrice = Integer.parseInt(product.getHighestBid()) + 1000;
+                    int highestPrice = highest + 1000;
                     binding.etPrice.setText(Integer.toString(highestPrice));
                     Toast.makeText(getApplicationContext(), "Bid should bigger than current highest bid", Toast.LENGTH_SHORT).show();
                     return;
