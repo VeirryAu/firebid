@@ -43,6 +43,7 @@ import java.util.List;
 
 public class BidActivity extends AppCompatActivity {
 
+    List<Bid> listBids;
     private Product product;
     private String PRODUCT_ID;
     private ActivityBidBinding binding;
@@ -83,7 +84,15 @@ public class BidActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (product != null && !product.getHighestBid().equals("") && Integer.parseInt(product.getHighestBid()) >= bid.getPrice()) {
+                int highest = 0;
+
+                if (listBids != null) {
+                    if (listBids.size() > 0) {
+                        highest = listBids.get(0).getPrice();
+                    }
+                }
+
+                if (product != null && highest != 0 && highest >= bid.getPrice()) {
                     int highestPrice = Integer.parseInt(product.getHighestBid()) + 1000;
                     binding.etPrice.setText(Integer.toString(highestPrice));
                     Toast.makeText(getApplicationContext(), "Bid should bigger than current highest bid", Toast.LENGTH_SHORT).show();
@@ -169,6 +178,7 @@ public class BidActivity extends AppCompatActivity {
                 // Convert query snapshot to a list of chats
                 List<Bid> bids = snapshot.toObjects(Bid.class);
 
+                listBids = bids;
                 updateBidList(bids);
             }
         });
