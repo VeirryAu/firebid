@@ -19,7 +19,7 @@ import java.util.List;
 public class ProductListPresenter implements ProductListContract.Presenter {
 
     private ProductListContract.View view;
-    private List<Product> rooms;
+    private List<Product> products;
 
     public ProductListPresenter(ProductListContract.View view){
         this.view = view;
@@ -47,13 +47,11 @@ public class ProductListPresenter implements ProductListContract.Presenter {
                     Product product = new Product();
                     product.setProductId(ds.getId());
                     product.setDescription(ds.getString("description"));
-                    product.setProductName(ds.getString("product_name"));
+                    product.setProductName(ds.getString("productName"));
                     product.setImageUrl(ds.getString("imageUrl"));
                     product.setWinner(ds.getString("winner"));
                     product.setHighestBid(ds.getString("highestBid"));
                     product.setEndTime(ds.getString("endTime"));
-                    Log.e("onEvent: ", ds.getString("description"));
-                    Log.e("productName: ", ds.getString("productName"));
                     products.add(product);
                 }
 
