@@ -29,7 +29,7 @@ public class ProductListPresenter implements ProductListContract.Presenter {
     public void loadProducts() {
 
         Query query = FirebaseFirestore.getInstance()
-                .collection("product-main2");
+                .collection("product-team2");
 
         query.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
