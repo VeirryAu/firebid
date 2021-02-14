@@ -44,7 +44,7 @@ public class ProductListPresenter implements ProductListContract.Presenter {
                 for(DocumentSnapshot ds: snapshot){
                     Product product = new Product();
                     product.setProductId(ds.getId());
-                    product.setProductName(ds.getString("productId"));
+                    product.setProductName(ds.getString("productName"));
                     product.setDescription(ds.getString("description"));
                     product.setImageUrl(ds.getString("imageUrl"));
                     product.setWinner(ds.getString("winner"));

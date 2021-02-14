@@ -8,6 +8,7 @@ public class Product {
     private String description;
     private String winner;
     private String highestBid;
+    private String endTime;
 
     public String getEndTime() {
         return endTime;
@@ -16,8 +17,6 @@ public class Product {
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
-
-    private String endTime;
 
     public String getProductId() {
         return productId;
@@ -74,6 +73,7 @@ public class Product {
         this.description = description;
         this.winner = winner;
         this.highestBid = highestBid;
+        this.endTime = endTime;
     }
 
     public Product(){}
