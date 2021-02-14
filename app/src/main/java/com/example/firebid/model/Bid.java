@@ -1,10 +1,12 @@
 package com.example.firebid.model;
 
+import com.google.firebase.Timestamp;
+
 public class Bid {
     private String productId;
     private String user;
     private int price;
-    private String time;
+    private Timestamp time;
 
     public String getProductId() {
         return productId;
@@ -30,11 +32,11 @@ public class Bid {
         this.price = price;
     }
 
-    public String getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 }

@@ -28,14 +28,14 @@ public class BidListAdapter extends RecyclerView.Adapter<BidListAdapter.BidListV
     @Override
     public BidListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.product_item, parent, false);
+        View view = inflater.inflate(R.layout.bid_item, parent, false);
         return new BidListViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull BidListViewHolder holder, int position) {
         Bid bid = bidList.get(position);
-        holder.tvPrice.setText(bid.getPrice());
+        holder.tvPrice.setText(String.valueOf(bid.getPrice()));
         holder.tvName.setText(bid.getUser());
     }
 

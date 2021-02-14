@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,7 +34,7 @@ public class BidActivity extends AppCompatActivity {
     private ActivityBidBinding binding;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private BidListAdapter bidListAdapter;
-
+    LinearLayoutManager linearLayoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +42,12 @@ public class BidActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-//        Intent intent = new Intent();
-//        PRODUCT_ID =  intent.getStringExtra("PRODUCT_ID");
-        PRODUCT_ID =  "12312";
+        Intent intent = getIntent();
+        PRODUCT_ID =  intent.getStringExtra("PRODUCT_ID");
+//        PRODUCT_ID =  "12312";
 
         loadSingleProduct();
+        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
     }
 
     private void loadSingleProduct(){
@@ -86,16 +88,16 @@ public class BidActivity extends AppCompatActivity {
 
                 // Convert query snapshot to a list of chats
                 List<Bid> bids = snapshot.toObjects(Bid.class);
-                bidListAdapter = new BidListAdapter(getApplicationContext(), (ArrayList<Bid>)bids);
-                updateBidList();
+
+                updateBidList(bids);
             }
         });
     }
 
-    private void updateBidList(){
-        binding.rvHighestBid.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+    private void updateBidList(List<Bid> bids){
+        bidListAdapter = new BidListAdapter(getApplicationContext(), (ArrayList<Bid>)bids);
+        binding.rvHighestBid.setLayoutManager(linearLayoutManager);
         binding.rvHighestBid.setAdapter(bidListAdapter);
-        bidListAdapter.notifyDataSetChanged();
     }
 
     private void updateUI(Product product){
