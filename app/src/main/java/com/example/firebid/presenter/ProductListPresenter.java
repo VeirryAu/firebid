@@ -1,5 +1,7 @@
 package com.example.firebid.presenter;
 
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 
 import com.example.firebid.contract.ProductListContract;
@@ -40,21 +42,23 @@ public class ProductListPresenter implements ProductListContract.Presenter {
                 }
 
 
-                List<Product> rooms = new ArrayList<>();
+                List<Product> products = new ArrayList<>();
                 for(DocumentSnapshot ds: snapshot){
                     Product product = new Product();
                     product.setProductId(ds.getId());
-                    product.setProductName(ds.getString("productName"));
                     product.setDescription(ds.getString("description"));
+                    product.setProductName(ds.getString("product_name"));
                     product.setImageUrl(ds.getString("imageUrl"));
                     product.setWinner(ds.getString("winner"));
                     product.setHighestBid(ds.getString("highestBid"));
                     product.setEndTime(ds.getString("endTime"));
-                    rooms.add(product);
+                    Log.e("onEvent: ", ds.getString("description"));
+                    Log.e("productName: ", ds.getString("productName"));
+                    products.add(product);
                 }
 
                 // Update UI
-                view.setProducts(rooms);
+                view.setProducts(products);
             }
         });
 
