@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.firebid.BidActivity;
 import com.example.firebid.R;
 import com.example.firebid.model.Product;
 
@@ -46,9 +47,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             @Override
             public void onClick(View v) {
                 Log.d("ROOM_ID", room.getProductName());
-//                Intent intent = new Intent(context, BidActivity.class);
-//                intent.putExtra("PRODUCT_ID", room.getProductId());
-//                context.startActivity(intent);
+                Intent intent = new Intent(context, BidActivity.class);
+                intent.putExtra("PRODUCT_ID", room.getProductId());
+                context.startActivity(intent);
             }
         });
     }
