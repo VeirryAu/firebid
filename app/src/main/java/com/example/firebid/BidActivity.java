@@ -72,7 +72,7 @@ public class BidActivity extends AppCompatActivity {
                 bid.setProductId(PRODUCT_ID);
                 bid.setTime(Timestamp.now());
                 bid.setUser(
-                        FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                        FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
                 if (binding.etPrice.getText() == null || binding.etPrice.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "Please Insert Your Bid", Toast.LENGTH_SHORT).show();
