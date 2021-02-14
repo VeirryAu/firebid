@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="app_line_black">
-        <item name="android:background">#757575</item>
+        <item name="android:background">#bdbdbd</item>
     </style>
 </resources>
