@@ -41,15 +41,19 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         Product room = products.get(position);
         holder.name.setText(room.getProductName());
         DecimalFormat formatter = new DecimalFormat("#,###,###");
-        Integer number = Integer.parseInt(room.getHighestBid());
-        String rtn = formatter.format(number).replace(",", ".");
-        holder.highestBid.setText(room.getHighestBid().equalsIgnoreCase("") ? "" : "Highest Bid: Rp " + rtn);
         holder.winner.setText(room.getWinner().equalsIgnoreCase("") ? "" : "Winner: " + room.getWinner());
         if (room.getHighestBid().equalsIgnoreCase("")) {
             holder.highestBid.setVisibility(View.GONE);
+        } else {
+            Integer number = Integer.parseInt(room.getHighestBid());
+            String rtn = formatter.format(number).replace(",", ".");
+            holder.highestBid.setText(room.getHighestBid().equalsIgnoreCase("") ? "" : "Highest Bid: Rp " + rtn);
+            holder.highestBid.setVisibility(View.VISIBLE);
         }
         if (room.getWinner().equalsIgnoreCase("")) {
             holder.winner.setVisibility(View.GONE);
+        } else {
+            holder.winner.setVisibility(View.VISIBLE);
         }
         holder.description.setText(room.getDescription().equalsIgnoreCase("") ?
                 "Mulai bid anda.." : room.getDescription());
