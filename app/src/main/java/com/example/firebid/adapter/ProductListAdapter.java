@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.firebid.BidActivity;
 import com.example.firebid.R;
 import com.example.firebid.model.Product;
 
@@ -34,11 +35,12 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         return new ProductViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product room = products.get(position);
         holder.name.setText(room.getProductName());
+        holder.highestBid.setText(room.getHighestBid().equalsIgnoreCase("") ? "" : "Highest Bid: " + room.getHighestBid());
+        holder.winner.setText(room.getWinner().equalsIgnoreCase("") ? "" : "Winner: " + room.getWinner());
         holder.description.setText(room.getDescription().equalsIgnoreCase("") ?
                 "Mulai bid anda.." : room.getDescription());
         holder.productRow.setOnClickListener(new View.OnClickListener(){
@@ -46,9 +48,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             @Override
             public void onClick(View v) {
                 Log.d("ROOM_ID", room.getProductName());
-//                Intent intent = new Intent(context, BidActivity.class);
-//                intent.putExtra("PRODUCT_ID", room.getProductId());
-//                context.startActivity(intent);
+                Intent intent = new Intent(context, BidActivity.class);
+                intent.putExtra("PRODUCT_ID", room.getProductId());
+                context.startActivity(intent);
             }
         });
     }
@@ -64,12 +66,14 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        TextView name, description;
+        TextView name, winner, highestBid, description;
         LinearLayout productRow;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.productName);
+            highestBid = (TextView) itemView.findViewById(R.id.highestBid);
+            winner = (TextView) itemView.findViewById(R.id.winner);
             description = (TextView) itemView.findViewById(R.id.roomDescription);
             productRow = (LinearLayout) itemView.findViewById(R.id.roomRow);
         }

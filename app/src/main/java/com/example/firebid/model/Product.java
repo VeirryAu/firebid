@@ -1,7 +1,5 @@
 package com.example.firebid.model;
 
-import java.util.Date;
-
 public class Product {
 
     private String productId;
@@ -10,6 +8,15 @@ public class Product {
     private String description;
     private String winner;
     private String highestBid;
+    private String endTime;
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
 
     public String getProductId() {
         return productId;
@@ -66,6 +73,7 @@ public class Product {
         this.description = description;
         this.winner = winner;
         this.highestBid = highestBid;
+        this.endTime = endTime;
     }
 
     public Product(){}
