@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.example.firebid.adapter.ProductListAdapter;
 import com.example.firebid.contract.ProductListContract;
-import com.example.firebid.databinding.ActivityRoomListBinding;
+import com.example.firebid.databinding.ActivityMainBinding;
 import com.example.firebid.model.Product;
 
 import java.util.List;
