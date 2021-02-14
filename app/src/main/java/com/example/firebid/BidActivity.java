@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,12 +31,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.type.DateTime;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class BidActivity extends AppCompatActivity {
 
+    private Product product;
     private String PRODUCT_ID;
     private ActivityBidBinding binding;
     private BidListAdapter bidListAdapter;
@@ -55,16 +62,53 @@ public class BidActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
 
         binding.btnMakeABid.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
+                loadSingleProduct();
                 Bid bid = new Bid();
-                bid.setPrice(Integer.valueOf(binding.etPrice.getText().toString()));
                 bid.setProductId(PRODUCT_ID);
                 bid.setTime(Timestamp.now());
                 bid.setUser(
                         FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
 
-                FirebaseFirestore.getInstance().collection("chats")
+                if (binding.etPrice.getText() == null || binding.etPrice.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please Insert Your Bid", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                bid.setPrice(Integer.parseInt(binding.etPrice.getText().toString()));
+                if (bid.getPrice() == 0) {
+                    Toast.makeText(getApplicationContext(), "Please Insert Your Bid", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (product != null && !product.getHighestBid().equals("") && Integer.parseInt(product.getHighestBid()) >= bid.getPrice()) {
+                    int highestPrice = Integer.parseInt(product.getHighestBid()) + 1000;
+                    binding.etPrice.setText(Integer.toString(highestPrice));
+                    Toast.makeText(getApplicationContext(), "Bid should bigger than current highest bid", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (product != null && product.getEndTime() != null) {
+                    if (!product.getEndTime().equals("")) {
+                        @SuppressLint("SimpleDateFormat")
+                        DateFormat df1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String string1 = product.getEndTime();
+                        try {
+                            long endTime = df1.parse(string1).getTime();
+                            long currentTime = (new Date()).getTime();
+                            long timeDiff = currentTime - endTime;
+                            if (currentTime > endTime) {
+                                Toast.makeText(getApplicationContext(), "Bid already finished", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        } catch (ParseException e) {
+
+                        }
+                    }
+                }
+
+                FirebaseFirestore.getInstance().collection("bid_team2")
                         .add(bid)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
@@ -97,6 +141,7 @@ public class BidActivity extends AppCompatActivity {
                     if (document.exists()) {
                         loadHighestBid();
                         updateUI(document.toObject(Product.class));
+                        product = document.toObject(Product.class);
                     }
                 }
             }
