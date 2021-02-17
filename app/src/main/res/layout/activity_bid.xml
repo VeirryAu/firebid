@@ -55,6 +55,12 @@
                 android:layout_height="3dp"
                 android:background="@color/colorAccent"
                 android:layout_marginBottom="16dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Highest Bid"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
